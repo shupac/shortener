@@ -1,6 +1,12 @@
 require 'sinatra'
 require 'active_record'
 require 'pry'
+require 'digest/sha1'
+require 'json'
+
+
+# Digest::SHA1.hexdigest 'www.google.com'
+
 
 ###########################################################
 # Configuration
@@ -44,7 +50,10 @@ get '/new' do
 end
 
 post '/new' do
-    # PUT CODE HERE TO CREATE NEW SHORTENED LINKS
+  url = request.POST['url']
+  hashedURL = Digest::SHA1.hexdigest url
+
+  
 end
 
 # MORE ROUTES GO HERE
