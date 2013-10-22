@@ -3,7 +3,7 @@
 <ul class="links">
 <% @links.each do |link| %>
   <li>
-    <a href="/<%= link.code %>"><%= link.code %></a>
+    <a href="/<%= link.shortened %>"><%= link.shortened %> </a><span><%= link.url %></span>
   </li>
 <% end %>
 </ul>

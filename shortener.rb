@@ -42,8 +42,7 @@ end
 ###########################################################
 
 get '/' do
-    @links = [] # FIXME
-    puts Link.where(url: 'www.google.com').inspect
+    @links = Link.all # FIXME
     erb :index
 end
 
@@ -53,7 +52,7 @@ end
 
 post '/new' do
   url = request.POST['url']
-  hashedURL = Digest::SHA1.hexdigest url
+  hashedURL = (Digest::SHA1.hexdigest url)[0..5]
   Link.create(url: url, shortened: hashedURL)
 end
 
