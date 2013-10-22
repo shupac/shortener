@@ -62,6 +62,8 @@ post '/new' do
   else
     puts 'Duplicate url entered'
   end
+  #respond with data object
+  Link.find_by_url(url)['shortened']
 end
 
 get '/*' do
@@ -76,7 +78,6 @@ get '/*' do
   end
 end
 
-# MORE ROUTES GO HERE
 
 
 
