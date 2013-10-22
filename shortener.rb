@@ -52,8 +52,39 @@ end
 
 post '/new' do
   url = request.POST['url']
+  puts url[0..3]
+  if url[0..3] != 'http'
+    url = 'http://' + url
+  end
   hashedURL = (Digest::SHA1.hexdigest url)[0..5]
-  Link.create(url: url, shortened: hashedURL)
+  if Link.find_by_url(url) == nil
+    Link.create(url: url, shortened: hashedURL)
+  else
+    puts 'Duplicate url entered'
+  end
+end
+
+get '/*' do
+  shortened = params[:splat].first
+  puts shortened
+  if Link.find_by_shortened(shortened) == nil
+    puts 'Shortened URL not found'
+    #return 404
+  else
+    puts Link.find_by_shortened(shortened)['url']
+    redirect(Link.find_by_shortened(shortened)['url'])
+  end
 end
 
 # MORE ROUTES GO HERE
+
+
+
+
+
+
+
+
+
+
+
