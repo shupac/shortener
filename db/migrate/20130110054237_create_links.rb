@@ -10,7 +10,7 @@ class CreateLinks < ActiveRecord::Migration
     # PUT MIGRATION CODE HERE TO SETUP DATABASE
 
     def self.up
-      create_table :links do |t|
+      create_table :link do |t|
         t.string :url
         t.string :shortened
         t.timestamps
@@ -18,7 +18,7 @@ class CreateLinks < ActiveRecord::Migration
     end
 
     def self.down
-      drop_table :links
+      drop_table :link
     end
 
 end

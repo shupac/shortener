@@ -34,6 +34,7 @@ end
 # http://guides.rubyonrails.org/association_basics.html
 
 class Link < ActiveRecord::Base
+  self.table_name = 'link'
 end
 
 ###########################################################
@@ -42,6 +43,7 @@ end
 
 get '/' do
     @links = [] # FIXME
+    puts Link.where(url: 'www.google.com').inspect
     erb :index
 end
 
@@ -52,8 +54,7 @@ end
 post '/new' do
   url = request.POST['url']
   hashedURL = Digest::SHA1.hexdigest url
-
-  
+  Link.create(url: url, shortened: hashedURL)
 end
 
 # MORE ROUTES GO HERE
